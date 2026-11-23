@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>KNOX CLIENT</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ================= AUTH SCREEN ================= -->
+    <div id="auth-screen">
+        <video id="bg-video" autoplay muted loop playsinline>
+            <source src="https://github.com/hiruhub/Source/raw/refs/heads/main/video1.mp4" type="video/mp4">
+        </video>
+        <div class="auth-overlay"></div>
+        
+        <div class="auth-container">
+            <div class="auth-logo">
+                <p>「永遠の絆」</p>
+                <h1 class="font-head">KNOX CLIENT</h1>
+                <p>TOGETHER BEYOND LIMITS</p>
+            </div>
+
+            <div class="auth-panel">
+                <div style="text-align: center; margin-bottom: 1.5rem; font-size: 0.8rem; letter-spacing: 2px;">
+                    ☁️ SECURE LOGIN ☁️
+                </div>
+                
+                <div class="input-group">
+                    <span style="margin-right: 10px;">👤</span>
+                    <input type="text" id="license-input" placeholder="ENTER VIP KEY" autocomplete="off">
+                    <button class="text-muted" style="background:none; border:none; cursor:pointer; font-size:0.8rem;" onclick="pasteKey()">📋 PASTE</button>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="remember-key">
+                    <label for="remember-key">REMEMBER KEY</label>
+                </div>
+
+                <div id="auth-error" class="text-red hidden" style="text-align: center; margin-bottom: 1rem; font-size: 0.9rem;"></div>
+
+                <button class="btn" id="verify-btn" onclick="verifyKey()">VERIFY KEY →</button>
+                
+                <div style="text-align: center; margin-top: 1rem; font-size: 0.8rem;">
+                    <span class="text-muted">SYSTEM STATUS:</span> <span class="text-green">READY</span>
+                </div>
+                
+                <div style="text-align: center; margin-top: 1rem; font-size: 0.9rem;">
+                    <span class="text-muted">No key?</span> <a href="#" class="text-red" style="text-decoration:none;">Get Key</a>
+                </div>
+
+                <div style="display: flex; gap: 10px; margin-top: 1.5rem;">
+                    <button class="btn btn-outline" onclick="window.open('https://t.me', '_blank')">✈️ TELEGRAM</button>
+                    <button class="btn btn-outline" onclick="alert('Contact your reseller.')">👤 RESELLER</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= DASHBOARD SCREEN ================= -->
+    <div id="dashboard-screen" class="hidden">
+        
+        <!-- Header -->
+        <header class="top-header">
+            <h2 class="font-head" id="page-title">HOME</h2>
+            <div class="header-actions">
+                <button class="icon-btn">🔔</button>
+                <button class="icon-btn" style="font-size: 0.8rem; font-weight: bold;">EN</button>
+            </div>
+        </header>
+
+        <!-- Tab: Home -->
+        <div id="tab-home" class="tab-content active">
+            <div class="status-bar">
+                <span><span class="status-dot"></span> CONNECTED</span>
+                <span class="text-muted" id="last-refreshed">JUST NOW</span>
+            </div>
+
+            <div class="timer-circle">
+                <div class="ghost-icon"></div>
+                <div class="timer-text font-head" id="countdown">00M 00S</div>
+                <div class="timer-label">TIME LEFT</div>
+            </div>
+
+            <div class="info-card">
+                <div style="font-size: 0.7rem; color: var(--text-muted); margin-bottom: 5px;">THIS KEY IS ON</div>
+                <div class="font-head" style="font-size: 1.2rem; margin-bottom: 5px;" id="device-info-text">LOADING...</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">new phone? ask your seller to reset it.</div>
+            </div>
+
+            <div class="info-card" style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted); margin-bottom: 5px;">KEY</div>
+                    <div class="font-mono" id="display-key">KNOX-XXXX-XXXX</div>
+                </div>
+                <button class="icon-btn" onclick="copyKey()">📋</button>
+            </div>
+
+            <div class="stat-grid">
+                <div class="stat-box">
+                    <span>ACTIVATED</span>
+                    <strong id="stat-activated">--</strong>
+                </div>
+                <div class="stat-box">
+                    <span>EXPIRES</span>
+                    <strong id="stat-expires">--</strong>
+                </div>
+                <div class="stat-box">
+                    <span>DEVICE</span>
+                    <strong id="stat-device">--</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Features -->
+        <div id="tab-features" class="tab-content">
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem; display: flex; justify-content: space-between;">
+                <span>changes apply from your next match</span>
+                <span>1/6</span>
+            </div>
+
+            <!-- Feature 1 -->
+            <div class="feature-card">
+                <div class="feature-header">
+                    <div class="feature-title">01 MARKER <span class="badge risk">RISK</span></div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" onchange="toggleFeature(this)">
+                        <span class="slider-toggle"></span>
+                    </label>
+                </div>
+                <div class="feature-body">
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">marks every enemy on your screen.</div>
+                    <div style="font-size: 0.7rem; color: #555; margin-bottom: 5px;">🔒 TURN ON TO CHANGE</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted);">MARK STYLE</div>
+                    <div class="style-grid">
+                        <div class="style-btn active">KNOX</div>
+                        <div class="style-btn">DREAM</div>
+                        <div class="style-btn">ICE WALL</div>
+                        <div class="style-btn">MOCO</div>
+                        <div class="style-btn">CLU</div>
+                        <div class="style-btn">SHIROU</div>
+                        <div class="style-btn">IRIS</div>
+                        <div class="style-btn">DREKI</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="feature-card">
+                <div class="feature-header">
+                    <div class="feature-title">02 AIMPOINT <span class="badge">NEW</span></div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" onchange="toggleFeature(this)">
+                        <span class="slider-toggle"></span>
+                    </label>
+                </div>
+                <div class="feature-body">
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">moves your aim from the chest toward the head. slide to choose how far.</div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 5px;">
+                        <span class="text-muted">AIM HEIGHT</span>
+                        <span class="font-head">NECK <strong id="aim-val" style="font-size: 1.5rem;">68%</strong></span>
+                    </div>
+                    
+                    <!-- Slider visual mockup -->
+                    <div style="position: relative; height: 120px; display: flex; align-items: center; justify-content: center;">
+                        <div style="position: absolute; left: 20%; top: 0; height: 100%; border-left: 1px solid #333; border-right: 1px solid #333; width: 40px; background: repeating-linear-gradient(45deg, #222, #222 5px, #111 5px, #111 10px);"></div>
+                        <input type="range" min="0" max="100" value="68" oninput="document.getElementById('aim-val').innerText = this.value + '%'" style="position: relative; z-index: 2;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-card">
+                <div class="feature-header">
+                    <div class="feature-title">03 SPEED BOOST <span class="badge">NEW</span></div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" onchange="toggleFeature(this)">
+                        <span class="slider-toggle"></span>
+                    </label>
+                </div>
+                <div class="feature-body">
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">makes your character move faster. slide to choose how much.</div>
+                    <div style="display: flex; justify-content: flex-end; margin-bottom: 5px;">
+                        <span class="font-head" style="font-size: 1.5rem;">x1.0</span>
+                    </div>
+                    <input type="range" min="1" max="5" value="1" step="1" style="width: 100%;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: #555; margin-top: 5px;">
+                        <span>x1.0</span><span>x1.1</span><span>x1.2</span><span>x1.3</span><span>x1.4</span><span>x1.5</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="feature-card">
+                <div class="feature-header">
+                    <div class="feature-title">04 AIM LAG</div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" onchange="toggleFeature(this)">
+                        <span class="slider-toggle"></span>
+                    </label>
+                </div>
+                <div class="feature-body">
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">freezes the enemy for a moment while you fire or scope, so they're easier to hit.</div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <span style="font-size: 0.9rem;">when firing</span>
+                        <label class="toggle-switch"><input type="checkbox"><span class="slider-toggle"></span></label>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 0.9rem;">when scoping</span>
+                        <label class="toggle-switch"><input type="checkbox"><span class="slider-toggle"></span></label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Tab: Manage -->
+        <div id="tab-manage" class="tab-content">
+            <div class="manage-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <span style="font-size: 0.7rem; color: var(--text-muted);">THIS DEVICE</span>
+                    <span style="font-size: 0.6rem; border: 1px solid #333; padding: 2px 6px; border-radius: 4px;">LOCKED TO THIS KEY</span>
+                </div>
+                <div class="font-head" style="font-size: 1.2rem;" id="manage-device-name">LOADING...</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">one key works on one phone at a time.</div>
+            </div>
+
+            <div class="manage-card">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span style="font-size: 0.7rem; color: var(--text-muted);">UPDATE NOTES</span>
+                    <span style="font-size: 0.7rem; cursor: pointer;" onclick="openModal()">ALL UPDATES ></span>
+                </div>
+                <div class="font-head" style="font-size: 1rem; margin-bottom: 5px;">BETA KNOX CLIENT V2</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">early access to the next client. things can break...</div>
+            </div>
+
+            <a href="#" class="manage-card link-item" style="text-decoration: none;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="background: #222; padding: 10px; border-radius: 4px;">▶</span>
+                    <div>
+                        <div style="font-size: 0.9rem;">SETUP GUIDE</div>
+                        <div style="font-size: 0.7rem; color: var(--text-muted);">get the app and connect</div>
+                    </div>
+                </div>
+                <span>></span>
+            </a>
+
+            <div class="manage-card">
+                <div style="font-size: 0.7rem; color: var(--text-muted); margin-bottom: 10px;">COMMUNITY</div>
+                <a href="#" class="link-item">
+                    <div style="display: flex; gap: 10px; align-items: center;"><span style="background: #222; padding: 5px 10px; border-radius: 4px;">D</span> DISCORD</div>
+                    <span>↗</span>
+                </a>
+                <a href="#" class="link-item">
+                    <div style="display: flex; gap: 10px; align-items: center;"><span style="background: #222; padding: 5px 10px; border-radius: 4px;">W</span> WHATSAPP</div>
+                    <span>↗</span>
+                </a>
+            </div>
+
+            <button class="btn" style="background: #2a1111; color: #ff4444; border: 1px solid #442222; margin-top: 1rem;" onclick="logout()">
+                LOG OUT
+            </button>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <div class="nav-item active" onclick="switchTab('home', this)">
+                <span>🏠</span> HOME
+                <div class="nav-indicator"></div>
+            </div>
+            <div class="nav-item" onclick="switchTab('features', this)">
+                <span>⚙️</span> FEATURES
+            </div>
+            <div class="nav-item" onclick="switchTab('manage', this)">
+                <span>☰</span> MANAGE
+            </div>
+        </nav>
+    </div>
+
+    <!-- Modals -->
+    <div id="updates-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="font-head">UPDATES</h2>
+                <button class="icon-btn" onclick="closeModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="update-item" style="border-left-color: #f39c12;">
+                    <strong style="display: block; margin-bottom: 5px;">updates still rolling out</strong>
+                    <span style="font-size: 0.8rem; color: var(--text-muted);">we're not fully done with this round of updates yet. things may still be rough - use at your own risk for now.</span>
+                </div>
+                <div class="update-item">
+                    <strong style="display: block; margin-bottom: 5px;">v1.9 - performance update</strong>
+                    <span style="font-size: 0.8rem; color: var(--text-muted);">we reworked the network and server picking for lower, steadier ping. more improvements are rolling out.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link JS -->
+    <script src="js/app.js"></script>
+</body>
+</html>
